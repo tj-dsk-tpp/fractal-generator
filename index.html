@@ -20,14 +20,14 @@
     <main class="p-3">
       <div class="container-fluid">
         <div class="row align-items-start">
-          <div class="col-3 p-3">
+          <div class="col-lg-3 p-3">
             <p class="h2">Select Fractal Options</p>
             <hr class="border border-2 border-secondary" />
             <div>
               <div class="my-3">
-                <label for="fractalName" class="form-label"
-                  >Select Fractal Type</label
-                >
+                <label for="fractalName" class="form-label">
+                  Select Fractal Type
+                </label>
                 <select
                   class="form-select"
                   aria-label="Fractal List"
@@ -40,9 +40,9 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label for="fractalDepth" class="form-label"
-                  >Enter Fractal Depth</label
-                >
+                <label for="fractalDepth" class="form-label">
+                  Enter Fractal Depth
+                </label>
                 <input
                   type="number"
                   class="form-control"
@@ -57,40 +57,39 @@
                 </div>
               </div>
               <div class="text-danger my-3" id="alert-box"></div>
-              <div class="row align-items-center">
-                <div class="form-check form-switch col-7">
+              <div class="row">
+                <div class="form-check form-switch col-lg-7">
                   <input
                     class="form-check-input"
                     type="checkbox"
                     role="switch"
                     id="animate"
                   />
-                  <label
-                    class="form-check-label"
-                    for="animate
-                  "
-                    >Animate the Rendering</label
-                  >
+                  <label class="form-check-label" for="animate">
+                    Animate the Rendering
+                  </label>
                 </div>
-                <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-                  <button
-                    class="btn btn-primary me-md-2"
-                    type="button"
-                    id="reset"
-                  >
-                    Reset
-                  </button>
-                  <button class="btn btn-primary" type="button" id="render">
-                    Render
-                  </button>
+                <div class="col-lg-5 d-grid gap-2 d-md-flex">
+                  <div class="btn-toolbar row w-100 justify-content-end">
+                    <div class="btn-group col-lg col-2">
+                      <button class="btn btn-primary" type="button" id="reset">
+                        Reset
+                      </button>
+                    </div>
+                    <div class="btn-group col-lg col-2">
+                      <button class="btn btn-primary" type="button" id="render">
+                        Render
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-9 m-0 text-center">
+          <div class="col-lg-9 m-0 text-center">
             <svg
-              width="800px"
-              height="800px"
+              width="100%"
+              height="100%"
               viewBox="0 0 1600 1600"
               xml:space="preserve"
               xmlns="http://www.w3.org/2000/svg"
@@ -101,6 +100,51 @@
         </div>
       </div>
     </main>
+    <footer class="bd-footer py-4 py-md-5 mt-5 bg-body-secondary">
+      <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+        <div class="row justify-content-between">
+          <div class="col-lg-4 col-5">
+            <h3 class="display-6 mb-2">Fractal Generator</h3>
+            <ul class="small list-unstyled">
+              <li class="mb-2">
+                Designed and built with all the love in the world by
+                <a
+                  class="link-secondary text-decoration-none"
+                  href="http://tj-dsk-tpp.github.io"
+                  >Tushar Jain</a
+                >.
+              </li>
+              <li class="mb-2">
+                Code licensed under
+                <a
+                  href="https://github.com/tj-dsk-tpp/fractal-generator/blob/main/license.md"
+                  class="link-secondary text-decoration-none"
+                  >MIT</a
+                >
+              </li>
+              <li class="mb-2">Currently v0.0.1</li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-5 text-end">
+            <h3 class="display-6">Links</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a
+                  href="https://github.com/tj-dsk-tpp/fractal-generator"
+                  class="link-secondary text-decoration-none"
+                  >Github Repo</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="link-secondary text-decoration-none">
+                  Wiki about the fractals
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="src/index.js"></script>
   </body>
