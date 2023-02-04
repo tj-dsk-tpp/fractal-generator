@@ -43,8 +43,8 @@ const fractalMap = {
     fill: (depth, svg, name, isAnimate) => {
         const vars = initFillVars();
         const { transform, rules } = rule_transform_set[name](build, vars);
-        build.f = (n, p) => [...transform[p]].forEach(r => rules[r](n));
-        build.f(depth, 'I');
+        build.f = (n, i, p) => [...transform[p]].forEach(r => rules[r](n, i));
+        build.f(depth, 0, 'I');
         stamp(vars, depth, svg, isAnimate, build);
     }
 };

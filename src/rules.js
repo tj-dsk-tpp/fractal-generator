@@ -1,10 +1,10 @@
 "use strict";
 
-import { forward, rotate, genCentersS, genCentersV } from "./utils.js"
+import { forward, rotate, genCentersC, genCentersV } from "./utils.js"
 
 const fractals = {
     linear: ["Dragon Curve", "Levy Curve", "Gosper Curve", "Koch Snowflake", "Square Wave", "Hilbert Curve"],
-    fill: ["pent", "trig", "hex"]
+    fill: ["Sierpinski Triangle", "Sierpinski Pentagon", "Sierpinski Hexagon", "Pentaflake", "Hexaflake"]
 }
 
 const rule_transform_set = {
@@ -79,48 +79,75 @@ const rule_transform_set = {
             n: (n) => rotate(vars.move, Math.PI / 2)
         }
     }),
-    pent: (build, vars) => {
-        vars.ratio = (1 + 2 * Math.cos(Math.PI / 5)) / (2 * (1 + 3 * Math.cos(Math.PI / 5)));
-        vars.angle = Math.PI / 2.5;
-        vars.sides = 5;
-        vars.rad = 840;
-        vars.sq = 1;
-        return {
-            transform: {
-                I: "I",
-            },
-            rules: {
-                I: (n) => n ? (genCentersV(vars, n), build.f(n - 1, 'I')) : null,
-            }
-        }
-    },
-    trig: (build, vars) => {
+    sierpinskiTriangle: (build, vars) => {
         vars.ratio = 1 / 2;
         vars.angle = Math.PI / 1.5;
         vars.sides = 3;
         vars.rad = 920;
-        vars.sq = 1;
         return {
             transform: {
                 I: "I",
             },
             rules: {
-                I: (n) => n ? (genCentersV(vars, n), build.f(n - 1, 'I')) : null,
+                I: (n, i) => i < n ? (genCentersV(vars, i), build.f(n, i + 1, 'I')) : null,
             }
         }
     },
-    hex: (build, vars) => {
+    sierpinskiPentagon: (build, vars) => {
+        vars.ratio = (1 + 2 * Math.cos(Math.PI / 5)) / (2 * (1 + 3 * Math.cos(Math.PI / 5)));
+        vars.angle = Math.PI / 2.5;
+        vars.sides = 5;
+        vars.rad = 840;
+        return {
+            transform: {
+                I: "I",
+            },
+            rules: {
+                I: (n, i) => i < n ? (genCentersV(vars, i), build.f(n, i + 1, 'I')) : null,
+            }
+        }
+    },
+    sierpinskiHexagon: (build, vars) => {
         vars.ratio = 1 / 3;
         vars.angle = Math.PI / 3;
         vars.sides = 6;
         vars.rad = 800;
-        vars.sq = .75;
         return {
             transform: {
                 I: "I",
             },
             rules: {
-                I: (n) => n ? (genCentersS(vars, n), build.f(n - 1, 'I')) : null,
+                I: (n, i) => i < n ? (genCentersV(vars, i), build.f(n, i + 1, 'I')) : null,
+            }
+        }
+    },
+    pentaflake: (build, vars) => {
+        vars.ratio = (1 + 2 * Math.cos(Math.PI / 5)) / (2 * (1 + 3 * Math.cos(Math.PI / 5)));
+        vars.angle = Math.PI / 2.5;
+        vars.sides = 5;
+        vars.rad = 840;
+        vars.invCenters = [];
+        return {
+            transform: {
+                I: "I",
+            },
+            rules: {
+                I: (n, i) => i < n ? (genCentersC(vars, i), build.f(n, i + 1, 'I')) : null,
+            }
+        }
+    },
+    hexaflake: (build, vars) => {
+        vars.ratio = 1/3;
+        vars.angle = Math.PI /3;
+        vars.sides = 6;
+        vars.rad = 800;
+        vars.invCenters = [];
+        return {
+            transform: {
+                I: "I",
+            },
+            rules: {
+                I: (n, i) => i < n ? (genCentersC(vars, i), build.f(n, i + 1, 'I')) : null,
             }
         }
     }

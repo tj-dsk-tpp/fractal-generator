@@ -30,7 +30,10 @@ const initLineVars = () => ({
 const initFillVars = () => ({
     centers: [{ x: 0, y: 0 }],
     bounds: { mx: 0, my: 0, Mx: 0, My: 0 },
-    polys: []
+    ratio: 0,
+    angle: 0,
+    sides: 0,
+    rad: 0,
 })
 
 const rotate = (point, angle) => {
@@ -53,7 +56,7 @@ const forward = vars => {
 const genCentersV = (vars, n) => {
     const newCenters = [];
     vars.centers.forEach(c => {
-        const move = { x: 0, y: -vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n - 1) };
+        const move = { x: 0, y: -vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n) };
         for (let i = 0; i < vars.sides; i++) {
             newCenters.push({
                 x: c.x + move.x,
@@ -64,11 +67,13 @@ const genCentersV = (vars, n) => {
     })
     vars.centers = newCenters;
 }
-const genCentersS = (vars, n) => {
+
+const genCentersC = (vars, n) => {
     const newCenters = [];
+    const newInvCenters = [];
     vars.centers.forEach(c => {
-        const move = { x: 0, y: -vars.rad * Math.sqrt(vars.sq) * (1 - vars.ratio) * Math.pow(vars.ratio, n - 1) };
-        rotate(move, vars.angle / 2);
+        newInvCenters.push(c)
+        const move = { x: 0, y: -vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n) };
         for (let i = 0; i < vars.sides; i++) {
             newCenters.push({
                 x: c.x + move.x,
@@ -77,8 +82,19 @@ const genCentersS = (vars, n) => {
             rotate(move, vars.angle);
         }
     })
+    vars.invCenters.forEach(ic => {
+        newCenters.push(ic)
+        const move = { x: 0, y: vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n) };
+        for (let i = 0; i < vars.sides; i++) {
+            newInvCenters.push({
+                x: ic.x + move.x,
+                y: ic.y + move.y
+            });
+            rotate(move, vars.angle);
+        }
+    })
     vars.centers = newCenters;
+    vars.invCenters = newInvCenters;
 }
 
-
-export { build, createBasePolyline, createBasePolygon, initLineVars, initFillVars, rotate, forward, genCentersV, genCentersS };
+export { build, createBasePolyline, createBasePolygon, initLineVars, initFillVars, rotate, forward, genCentersV, genCentersC };
