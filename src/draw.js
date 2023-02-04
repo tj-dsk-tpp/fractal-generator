@@ -19,7 +19,7 @@ const rule = (vars, svg, isAnimate) => {
                 elm.setAttribute('points', `${elm.getAttribute('points')} ${vars.points[i].x + center.x},${vars.points[i].y + center.y}`);
                 i++;
             }
-        }, 20);
+        }, 5);
     } else elm.setAttribute("points", vars.points.map(p => `${p.x + center.x},${p.y + center.y}`).join(' '));
 }
 
@@ -48,7 +48,7 @@ const stamp = (vars, depth, svg, isAnimate) => {
         x: 0,
         y: vars.rad * f
     }
-    vars.invCenters.forEach(ic => {
+    vars.invCenters?.forEach(ic => {
         const pts = []
         for (let i = 0; i < vars.sides; i++) {
             const x = ic.x + move.x;
@@ -77,7 +77,7 @@ const stamp = (vars, depth, svg, isAnimate) => {
                 svg.appendChild(elm);
                 i++;
             }
-        }, 20);
+        }, 5);
     } else polyPts.forEach(pp => {
         const elm = createBasePolygon();
         elm.setAttribute('points', pp.map(p => `${p.x + center.x},${p.y + center.y}`).join(' '));
