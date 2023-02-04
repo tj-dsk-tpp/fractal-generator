@@ -1,0 +1,34 @@
+{
+  "name": "fractal-generator",
+  "description": "a simple javascript program to generate fractals",
+  "keywords": [
+    "nodejs",
+    "svg",
+    "fractals",
+    "geometry",
+    "animation"
+  ],
+  "repository": "github:tj-dsk-tpp/fractal-generator",
+  "homepage": "https://tj-dsk-tpp.github.io/fractal-generator",
+  "bugs": {
+    "url": "https://github.com/tj-dsk-tpp/fractal-generator/issues",
+    "email": "tushar01.tjdsk@gmail.com"
+  },
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.0.0"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Tushar Jain",
+    "email": "tushar01.tjdsk@gmail.com",
+    "url": "http://tj-dsk-tpp.github.io"
+  }
+}
