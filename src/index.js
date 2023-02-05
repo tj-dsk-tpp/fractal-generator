@@ -11,6 +11,7 @@ const resetBtn = document.getElementById("reset");
 const renderBtn = document.getElementById("render");
 
 const svgBox = document.getElementById("svg-box");
+const versionBox = document.getElementById("version");
 
 //imports
 import { fractals, rule_transform_set } from "./rules.js";
@@ -81,3 +82,4 @@ renderBtn.addEventListener('click', (evt) => {
     const fnn = fn.split('-');
     fractalMap[fnn[0]](fd, svgBox, fnn[1], animate.checked);
 });
+versionBox.innerText = APP_VERSION;
