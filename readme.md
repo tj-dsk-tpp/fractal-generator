@@ -3,7 +3,7 @@
 
 > simple javascript program to render fractsls upto the given iterative depth.
 
-### Check this project out [here](https://tj-dsk-tpp.github.io/fractal-generator)
+### Check out this project [here](https://tj-dsk-tpp.github.io/fractal-generator)
 
 ## Features
 
@@ -69,8 +69,11 @@ The app can be deployed to any hosting platform that supports Node.js.
 
 ## Contribution
 
-This project is open for contribution, if you have any suggestion, feel free to reach out to me.
+This project is open for contribution, if you have any suggestion, feel free to reach out to me via mail, linkedin, github, project issues. Whichever is accessible to you.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](license.md) file for details.
+
+## References
+A math video introduced me to the concept of fractals and that small event planted a seed in me which has now taken shape into this project. I'll be listing all the articles, wikis, videos, lectures etc [here](references.md).
