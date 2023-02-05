@@ -60,8 +60,7 @@ The app can be deployed to any hosting platform that supports Node.js.
 ## TODO
 
 1. Adding more fractals (never ending task).
-2. Implement coloring.
-3. Add save as feature.
+2. Add save as feature.
 
 ## Author
 
