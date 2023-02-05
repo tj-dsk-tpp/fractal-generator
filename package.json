@@ -20,7 +20,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=./",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "version": "npm run version:commit && npm run version:update && npm run version:push",
+    "version:commit": "git add . && git commit -m \"Version Update\"",
+    "version:patch": "npm version $1",
+    "version:push": "git push origin main"
   },
   "devDependencies": {
     "vite": "^4.0.0"
