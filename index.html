@@ -56,6 +56,15 @@
       body {
         font-family: "Raleway", sans-serif;
       }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      body {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
     </style>
     <script type="module" crossorigin src="./assets/index-d267a66a.js"></script>
   </head>
@@ -64,7 +73,8 @@
     <header class="pt-3 px-3">
       <div class="col">
         <p class="h1">
-          <img src="./logo.svg" width="40px" class="mb-3" />&emsp14;Fractal Generator
+          <img src="./logo.svg" width="40px" class="mb-3" />&emsp14;Fractal
+          Generator
         </p>
       </div>
     </header>
@@ -182,7 +192,8 @@
         <div class="row justify-content-between">
           <div class="col-8 border-end border-dark-subtle">
             <h3 class="display-6 mb-2">
-              <img src="logo.svg" width="40px" class="mb-3" />&emsp14;Fractal Generator
+              <img src="logo.svg" width="40px" class="mb-3" />&emsp14;Fractal
+              Generator
             </h3>
             <ul class="small list-unstyled">
               <li class="mb-2">
