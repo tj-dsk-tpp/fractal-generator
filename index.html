@@ -1,161 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://github.githubassets.com/pinned-octocat.svg"
+    />
+    <!-- Primary Meta Tags -->
+    <title>Fractals | Tushar Jain (tj-dsk-tpp)</title>
+    <meta name="title" content="Fractals | Tushar Jain (tj-dsk-tpp)" />
+    <meta
+      name="description"
+      content="A simple javascript program to render fractals."
+    />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/svg+xml" href="https://github.githubassets.com/pinned-octocat.svg" />
-	<!-- Primary Meta Tags -->
-	<title>Fractals | Tushar Jain (tj-dsk-tpp)</title>
-	<meta name="title" content="Fractals | Tushar Jain (tj-dsk-tpp)" />
-	<meta name="description" content="A simple javascript program to render fractals." />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://tj-dsk-tpp.github.io/fractal-generator/"
+    />
+    <meta property="og:title" content="Fractals | Tushar Jain (tj-dsk-tpp)" />
+    <meta
+      property="og:description"
+      content="A simple javascript program to render fractals."
+    />
+    <meta property="og:image" content="" />
 
-	<!-- Open Graph / Facebook -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://tj-dsk-tpp.github.io/fractal-generator/" />
-	<meta property="og:title" content="Fractals | Tushar Jain (tj-dsk-tpp)" />
-	<meta property="og:description" content="A simple javascript program to render fractals." />
-	<meta property="og:image" content="" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://tj-dsk-tpp.github.io/fractal-generator/"
+    />
+    <meta
+      property="twitter:title"
+      content="Fractals | Tushar Jain (tj-dsk-tpp)"
+    />
+    <meta
+      property="twitter:description"
+      content="A simple javascript program to render fractals."
+    />
+    <meta property="twitter:image" content="" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <script type="module" crossorigin src="./assets/index-a033d601.js"></script>
+  </head>
 
-	<!-- Twitter -->
-	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content="https://tj-dsk-tpp.github.io/fractal-generator/" />
-	<meta property="twitter:title" content="Fractals | Tushar Jain (tj-dsk-tpp)" />
-	<meta property="twitter:description" content="A simple javascript program to render fractals." />
-	<meta property="twitter:image" content="" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
-  <script type="module" crossorigin src="./assets/index-a033d601.js"></script>
-</head>
-
-<body>
-	<header class="pt-3 px-3">
-		<div class="col">
-			<p class="h1">Fractal Generator</p>
-		</div>
-	</header>
-	<main class="p-3">
-		<div class="container-fluid">
-			<div class="row align-items-start">
-				<div class="col-lg-3 p-3">
-					<p class="h2">Select Fractal Options</p>
-					<hr class="border border-2 border-secondary" />
-					<div>
-						<div class="my-3">
-							<label for="fractalName" class="form-label">
-								Select Fractal Type
-							</label>
-							<select class="form-select" aria-label="Fractal List" id="fractalName" required>
-								<option value="" disabled selected>
-									Select a fractal to generate
-								</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label for="fractalDepth" class="form-label">
-								Enter Fractal Depth
-							</label>
-							<input type="number" class="form-control" id="fractalDepth"
-								aria-describedby="frcatalDepthHelp" min="0" placeholder="0" value="0" />
-							<div id="frcatalDepthHelp" class="form-text">
-								Enter the iterative depth for the fractal
-							</div>
-						</div>
-						<div class="text-danger my-3" id="alert-box"></div>
-						<div class="row">
-							<div class="col-7">
-								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" role="switch" id="animate" />
-									<label class="form-check-label" for="animate">
-										Animate the Rendering
-									</label>
-								</div>
-								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" role="switch" id="colorful"
-										disabled />
-									<label class="form-check-label" for="colorful">
-										Color The Fractal
-									</label>
-								</div>
-							</div>
-							<div class="col-5 px-0">
-								<div class="btn-toolbar row w-100 justify-content-end">
-									<div class="btn-group col-5 px-0">
-										<button class="btn btn-primary" type="button" id="reset">
-											Reset
-										</button>
-									</div>
-									<div class="col-1"></div>
-									<div class="btn-group col-5 px-0">
-										<button class="btn btn-primary" type="button" id="render">
-											Render
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="col mt-3">
-								<div class="input-group mb-3">
-									<button class="btn btn-outline-primary" type="button" id="save" disabled>
-										Save as
-									</button>
-									<select class="form-select border-primary bg-white text-primary" id="saveOptions"
-										aria-label="Save the fractal as" disabled>
-										<option selected disabled>Choose...</option>
-										<option value="svg">SVG</option>
-										<option value="jpg">JPG</option>
-										<option value="png">PNG</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-9 m-0 text-center">
-					<svg width="100%" height="100%" viewBox="0 0 1600 1600" xml:space="preserve"
-						xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-						id="svg-box"></svg>
-				</div>
-			</div>
-		</div>
-	</main>
-	<footer class="bd-footer py-4 py-md-5 mt-5 bg-body-secondary">
-		<div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
-			<div class="row justify-content-between">
-				<div class="col-lg-4 col-5">
-					<h3 class="display-6 mb-2">Fractal Generator</h3>
-					<ul class="small list-unstyled">
-						<li class="mb-2">
-							Designed and built with all the love in the world by
-							<a class="link-secondary text-decoration-none" href="http://tj-dsk-tpp.github.io">Tushar
-								Jain</a>.
-						</li>
-						<li class="mb-2">
-							Code licensed under
-							<a href="https://github.com/tj-dsk-tpp/fractal-generator/blob/main/license.md"
-								class="link-secondary text-decoration-none">MIT</a>
-						</li>
-						<li class="mb-2">Currently v0.0.1</li>
-					</ul>
-				</div>
-				<div class="col-lg-4 col-5 text-end">
-					<h3 class="display-6">Links</h3>
-					<ul class="list-unstyled">
-						<li class="mb-2">
-							<a href="https://github.com/tj-dsk-tpp/fractal-generator"
-								class="link-secondary text-decoration-none">Github Repo</a>
-						</li>
-						<li class="mb-2">
-							<a href="#" class="link-secondary text-decoration-none">
-								Wiki about the fractals
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	
-</body>
-
+  <body>
+    <header class="pt-3 px-3">
+      <div class="col">
+        <p class="h1">Fractal Generator</p>
+      </div>
+    </header>
+    <main class="p-3">
+      <div class="container-fluid">
+        <div class="row align-items-start">
+          <div class="col-lg-3 p-3">
+            <p class="h2">Select Fractal Options</p>
+            <hr class="border border-2 border-secondary" />
+            <div>
+              <div class="my-3">
+                <label for="fractalName" class="form-label">
+                  Select Fractal Type
+                </label>
+                <select
+                  class="form-select"
+                  aria-label="Fractal List"
+                  id="fractalName"
+                  required
+                >
+                  <option value="" disabled selected>
+                    Select a fractal to generate
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="fractalDepth" class="form-label">
+                  Enter Fractal Depth
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="fractalDepth"
+                  aria-describedby="frcatalDepthHelp"
+                  min="0"
+                  placeholder="0"
+                  value="0"
+                />
+                <div id="frcatalDepthHelp" class="form-text">
+                  Enter the iterative depth for the fractal
+                </div>
+              </div>
+              <div class="text-danger my-3" id="alert-box"></div>
+              <div class="row">
+                <div class="col-7">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="animate"
+                    />
+                    <label class="form-check-label" for="animate">
+                      Animate the Rendering
+                    </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="colorful"
+                      disabled
+                    />
+                    <label class="form-check-label" for="colorful">
+                      Color The Fractal
+                    </label>
+                  </div>
+                </div>
+                <div class="col-5 px-0">
+                  <div class="btn-toolbar row w-100 justify-content-end">
+                    <div class="btn-group col-5 px-0">
+                      <button class="btn btn-primary" type="button" id="reset">
+                        Reset
+                      </button>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="btn-group col-5 px-0">
+                      <button class="btn btn-primary" type="button" id="render">
+                        Render
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mt-3">
+                  <div class="input-group mb-3">
+                    <button
+                      class="btn btn-outline-primary"
+                      type="button"
+                      id="save"
+                      disabled
+                    >
+                      Save as
+                    </button>
+                    <select
+                      class="form-select border-primary bg-white text-primary"
+                      id="saveOptions"
+                      aria-label="Save the fractal as"
+                      disabled
+                    >
+                      <option selected disabled>Choose...</option>
+                      <option value="svg">SVG</option>
+                      <option value="jpg">JPG</option>
+                      <option value="png">PNG</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9 m-0 text-center">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 1600 1600"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              id="svg-box"
+            ></svg>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bd-footer py-4 py-md-5 mt-5 bg-body-secondary">
+      <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+        <div class="row justify-content-between">
+          <div class="col-8 border-end border-dark-subtle">
+            <h3 class="display-6 mb-2">Fractal Generator</h3>
+            <ul class="small list-unstyled">
+              <li class="mb-2">
+                Designed and built with all the love in the world by
+                <a
+                  class="link-secondary text-decoration-none"
+                  href="http://tj-dsk-tpp.github.io"
+                  >Tushar Jain</a
+                >.
+              </li>
+              <li class="mb-2">
+                Code licensed under
+                <a
+                  href="https://github.com/tj-dsk-tpp/fractal-generator/blob/main/license.md"
+                  class="link-secondary text-decoration-none"
+                  >MIT</a
+                >
+              </li>
+              <li class="mb-2">Currently v0.0.1</li>
+            </ul>
+          </div>
+          <div class="col-4 text-start">
+            <h3 class="display-6">Links</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a
+                  href="https://github.com/tj-dsk-tpp/fractal-generator"
+                  class="link-secondary text-decoration-none"
+                  >Github Repo</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://github.com/tj-dsk-tpp/fractal-generator/blob/main/references.md"
+                  class="link-secondary text-decoration-none"
+                >
+                  References
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+  </body>
 </html>
