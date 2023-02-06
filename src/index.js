@@ -32,7 +32,7 @@ for (const [key, values] of Object.entries(fractals)) {
             const zz = value.split(' ');
             zz[0] = zz[0].toLowerCase()
             const opt = document.createElement('option');
-            opt.setAttribute("value", `${key}-${zz.join('')}`);
+            opt.setAttribute("value", `${key}->${zz.join('')}`);
             opt.innerText = value;
             fractalType.appendChild(opt);
         }
@@ -45,6 +45,11 @@ const fractalMap = {
     linear: (depth, svg, name, isAnimate) => {
         const vars = initLineVars();
         const { transform, rules } = rule_transform_set.linear[name](build, vars);
+        if (depth > vars.upperLimit) {
+            alertBox.innerText = `We are reducing the depth as it exceeds a certain limit.`
+            depth = vars.upperLimit;
+            fractalDepth.value = vars.upperLimit;
+        }
         build.f = (n, p) => [...transform[p]].forEach(r => rules[r](n));
         build.f(depth, 'I');
         rule(vars, svg, isAnimate, build)
@@ -52,6 +57,11 @@ const fractalMap = {
     fill: (depth, svg, name, isAnimate) => {
         const vars = initFillVars();
         const { transform, rules } = rule_transform_set.fill[name](build, vars);
+        if (depth > vars.upperLimit) {
+            alertBox.innerText = `We are reducing the depth as it exceeds a certain limit.`
+            depth = vars.upperLimit;
+            fractalDepth.value = vars.upperLimit;
+        }
         build.f = (n, i, p) => [...transform[p]].forEach(r => rules[r](n, i));
         build.f(depth, 0, 'I');
         stamp(vars, depth, svg, isAnimate, build);
@@ -87,7 +97,7 @@ renderBtn.addEventListener('click', (evt) => {
         alertBox.innerText = "Enter valid depth";
         return
     }
-    const fnn = fn.split('-');
+    const fnn = fn.split('->');
     fractalMap[fnn[0]](fd, svgBox, fnn[1], animate.checked);
 });
 versionBox.innerText = APP_VERSION;

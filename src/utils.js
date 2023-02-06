@@ -53,6 +53,29 @@ const forward = vars => {
     vars.bounds.My = Math.max(vars.bounds.My, vars.origin.y);
 }
 
+const buildPolygon = (polyPts, cntrs, move, bounds, sides, angle) => {
+    cntrs.forEach(c => {
+        const pts = []
+        for (let i = 0; i < sides; i++) {
+            const x = c.x + move.x;
+            const y = c.y + move.y;
+            bounds.mx = Math.min(bounds.mx, x);
+            bounds.my = Math.min(bounds.my, y);
+            bounds.Mx = Math.max(bounds.Mx, x);
+            bounds.My = Math.max(bounds.My, y);
+            pts.push({ x: x, y: y });
+            rotate(move, angle);
+        }
+        polyPts.push(pts);
+    })
+}
+
+const savePolygon = (polyPt, center, svg) => {
+    const elm = createBasePolygon();
+    elm.setAttribute('points', polyPt.map(p => `${p.x + center.x},${p.y + center.y}`).join(' '));
+    svg.appendChild(elm);
+}
+
 const genCentersV = (vars, n) => {
     const newCenters = [];
     vars.centers.forEach(c => {
@@ -71,7 +94,7 @@ const genCentersV = (vars, n) => {
 const genCentersC = (vars, n) => {
     const newCenters = [];
     const newInvCenters = [];
-    vars.centers.forEach(c => {
+    vars.centers.up.forEach(c => {
         newInvCenters.push(c)
         const move = { x: 0, y: -vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n) };
         for (let i = 0; i < vars.sides; i++) {
@@ -82,7 +105,7 @@ const genCentersC = (vars, n) => {
             rotate(move, vars.angle);
         }
     })
-    vars.invCenters.forEach(ic => {
+    vars.centers.inv.forEach(ic => {
         newCenters.push(ic)
         const move = { x: 0, y: vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n) };
         for (let i = 0; i < vars.sides; i++) {
@@ -93,8 +116,25 @@ const genCentersC = (vars, n) => {
             rotate(move, vars.angle);
         }
     })
-    vars.centers = newCenters;
-    vars.invCenters = newInvCenters;
+    vars.centers.up = newCenters;
+    vars.centers.inv = newInvCenters;
 }
 
-export { build, createBasePolyline, createBasePolygon, initLineVars, initFillVars, rotate, forward, genCentersV, genCentersC };
+const genCentersOnV = (vars, n, j) => {
+    const newCenters = [];
+    console.log(vars.centers)
+    vars.centers[toString(j)][vars.centers[toString(j)].length - 1].forEach(
+        c => {
+            const move = { x: 0, y: vars.rad * (1 - vars.ratio) * Math.pow(vars.ratio, n) };
+            for (let i = 1; i <= vars.sides; i++) {
+                if (Math.abs(i - j) == 2) newCenters[toString[i]].push({
+                    x: ic.x + move.x,
+                    y: ic.y + move.y
+                });
+                rotate(move, vars.angle);
+            }
+        }
+    )
+}
+
+export { build, createBasePolyline, createBasePolygon, initLineVars, initFillVars, rotate, forward, genCentersV, genCentersC, genCentersOnV, buildPolygon, savePolygon };
