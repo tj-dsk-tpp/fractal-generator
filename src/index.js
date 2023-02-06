@@ -86,6 +86,7 @@ resetBtn.addEventListener('click', () => {
 
 renderBtn.addEventListener('click', (evt) => {
     svgBox.innerHTML = "";
+    alertBox.innerText = "";
     build.renderer ? (clearInterval(build.renderer)) : null;
     const fn = fractalType.value
     const fd = parseInt(fractalDepth.value);
