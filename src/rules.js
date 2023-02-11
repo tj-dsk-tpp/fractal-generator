@@ -1,10 +1,10 @@
 "use strict";
 
-import { forward, rotate, genCentersC, genCentersV, genCentersOnV } from "./utils.js"
+import { forward, rotate, genCentersC, genCentersV, genCentersVS } from "./utils.js"
 
 const fractals = {
-    linear: ["Dragon Curve", "Levy Curve", "Gosper Curve", "Koch Snowflake", "Minkowski Sausage", "Hilbert Curve", "Peano Curve", "Fibonacci Word Fractal", "T-Square", /* "De Rham Curve" */],
-    fill: ["Sierpinski Triangle", "Sierpinski Pentagon", "Sierpinski Hexagon", "Pentaflake", "Hexaflake", /* "T-Square", "Sierpinki Carpet", "Mega Menger Carpet" */],
+    linear: ["Dragon Curve", "Levy Curve", "Gosper Curve", "Koch Snowflake", "Koch Anit Snowflake", "Minkowski Sausage", "Hilbert Curve", "Peano Curve", "Fibonacci Word Fractal", "T-Square", /* "De Rham Curve" */],
+    fill: ["Sierpinski Triangle", "Sierpinski Pentagon", "Sierpinski Hexagon", "Pentaflake", "Hexaflake", "Sierpinki Carpet", /* "T-Square",  "Mega Menger Carpet" */],
     branching: [/* "Sierpinski Skeleton",  "Vicsek fractal", "Fractal Tree"*/],
     sets: [/*"Mandelbrot Set", "Multibrot Set", "Julia Sets", "Burning Ship" */],
     attractors: [/* "TinkerBell Map", "Strange Attractor", "Lorenz Attractor" */],
@@ -34,12 +34,14 @@ const rule_transform_set = {
             return {
                 transform: {
                     I: "f",
-                    f: "pfnnfp"
+                    f: "fnnhp",
+                    h: "phnnhp"
                 },
                 rules: {
                     f: (n) => n ? build.f(n - 1, 'f') : forward(vars),
-                    p: (n) => rotate(vars.move, -Math.PI / 4),
-                    n: (n) => rotate(vars.move, Math.PI / 4)
+                    h: (n) => n ? build.f(n - 1, 'h') : forward(vars),
+                    p: (n) => rotate(vars.move, Math.PI / 4),
+                    n: (n) => rotate(vars.move, -Math.PI / 4)
                 }
             };
         },
@@ -65,6 +67,19 @@ const rule_transform_set = {
                 transform: {
                     I: "fnnfnnfnn",
                     f: "fpfnnfpf"
+                }, rules: {
+                    f: (n) => n ? build.f(n - 1, 'f') : forward(vars),
+                    p: (n) => rotate(vars.move, -Math.PI / 3),
+                    n: (n) => rotate(vars.move, Math.PI / 3)
+                }
+            };
+        },
+        kochAnitSnowflake: (build, vars) => {
+            vars.upperLimit = 5;
+            return {
+                transform: {
+                    I: "fnnfnnfnn",
+                    f: "fnfppfnf"
                 }, rules: {
                     f: (n) => n ? build.f(n - 1, 'f') : forward(vars),
                     p: (n) => rotate(vars.move, -Math.PI / 3),
@@ -104,6 +119,7 @@ const rule_transform_set = {
         },
         peanoCurve: (build, vars) => {
             vars.upperLimit = 5;
+            rotate(vars.move, Math.PI / 4)
             return {
                 transform: {
                     I: "f",
@@ -202,7 +218,7 @@ const rule_transform_set = {
                 up: [vars.centers[0]],
                 inv: []
             };
-            vars.upperLimit=5;
+            vars.upperLimit = 5;
             return {
                 transform: {
                     I: "I",
@@ -217,7 +233,7 @@ const rule_transform_set = {
             vars.angle = Math.PI / 3;
             vars.sides = 6;
             vars.rad = 800;
-            vars.upperLimit=5;
+            vars.upperLimit = 5;
             vars.centers = {
                 up: [vars.centers[0]],
                 inv: []
@@ -231,7 +247,24 @@ const rule_transform_set = {
                 }
             }
         },
+        sierpinkiCarpet: (build, vars) => {
+            vars.ratio = 1 / 3;
+            vars.angle = Math.PI / 2;
+            vars.sides = 4;
+            vars.rad = 800;
+            vars.upperLimit = 5;
+            vars.sr = 1 / Math.sqrt(2);
+            return {
+                transform: {
+                    I: "I",
+                },
+                rules: {
+                    I: (n, i) => i < n ? (genCentersVS(vars, i), build.f(n, i + 1, 'I')) : null,
+                }
+
+            }
+        }
     }
 }
 
-export { fractals, rule_transform_set }
+export { fractals, rule_transform_set };
